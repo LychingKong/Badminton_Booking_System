@@ -1,0 +1,46 @@
+<!-- templates/dashboard.html -->
+{% extends "base.html" %} {% block content %}
+<div class="bg-white p-8 rounded shadow">
+  <h2 class="text-2xl font-bold mb-6">My Bookings</h2>
+  {% if bookings %}
+  <div class="overflow-x-auto">
+    <table class="w-full">
+      <thead>
+        <tr class="bg-gray-100">
+          <th class="px-4 py-2">Court</th>
+          <th class="px-4 py-2">Date</th>
+          <th class="px-4 py-2">Time</th>
+          <th class="px-4 py-2">Status</th>
+          <th class="px-4 py-2">Amount</th>
+          <th class="px-4 py-2">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for booking in bookings %}
+        <tr class="border-b">
+          <td class="px-4 py-2">{{ booking[1] }}</td>
+          <td class="px-4 py-2">{{ booking[2] }}</td>
+          <td class="px-4 py-2">{{ booking[3] }} - {{ booking[4] }}</td>
+          <td class="px-4 py-2">{{ booking[5] }}</td>
+          <td class="px-4 py-2">${{ "%.2f"|format(booking[6]) }}</td>
+          <td class="px-4 py-2">
+            {% if booking[5] == 'confirmed' %}
+            <a
+              href="/cancel/{{ booking[0] }}"
+              class="text-red-500 hover:text-red-700"
+              onclick="return confirm('Are you sure you want to cancel this booking?')"
+            >
+              Cancel
+            </a>
+            {% endif %}
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+  {% else %}
+  <p class="text-gray-600">No bookings found.</p>
+  {% endif %}
+</div>
+{% endblock %}

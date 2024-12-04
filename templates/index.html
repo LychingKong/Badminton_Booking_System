@@ -1,0 +1,20 @@
+<!-- templates/index.html -->
+{% extends "base.html" %} {% block content %}
+<div class="text-center">
+  <h1 class="text-4xl font-bold mb-8">
+    Welcome to Badminton Court Booking System
+  </h1>
+  <div class="space-x-4">
+    <a
+      href="/login"
+      class="bg-blue-500 text-white px-6 py-2 rounded hover:bg-blue-600"
+      >Login</a
+    >
+    <a
+      href="/register"
+      class="bg-green-500 text-white px-6 py-2 rounded hover:bg-green-600"
+      >Register</a
+    >
+  </div>
+</div>
+{% endblock %}

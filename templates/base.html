@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Badminton Court Booking System</title>
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body class="bg-gray-100">
+    <nav class="bg-blue-600 p-4">
+      <div class="container mx-auto flex justify-between items-center">
+        <a href="/" class="text-white text-xl font-bold">Badminton Courts</a>
+        <div>
+          {% if session.user_id %}
+          <a href="/dashboard" class="text-white mx-2">Dashboard</a>
+          <a href="/courts" class="text-white mx-2">Book Court</a>
+          <a href="/logout" class="text-white mx-2">Logout</a>
+          {% else %}
+          <a href="/login" class="text-white mx-2">Login</a>
+          <a href="/register" class="text-white mx-2">Register</a>
+          {% endif %}
+        </div>
+      </div>
+    </nav>
+
+    <div class="container mx-auto mt-8 px-4">
+      {% with messages = get_flashed_messages(with_categories=true) %} {% if
+      messages %} {% for category, message in messages %}
+      <div
+        class="mb-4 p-4 rounded {% if category == 'error' %}bg-red-100 text-red-700{% elif category == 'success' %}bg-green-100 text-green-700{% else %}bg-blue-100 text-blue-700{% endif %}"
+      >
+        {{ message }}
+      </div>
+      {% endfor %} {% endif %} {% endwith %} {% block content %}{% endblock %}
+    </div>
+  </body>
+</html>
